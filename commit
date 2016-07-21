@@ -1,6 +1,0 @@
-7-20-16 Commit with README, functions.php, and singerSignUp.php
-
-Contains README detailing the project function, as well as a
-functions.php file containing a function allowing us to redirect 
-users to different pages, called Redirect. singerSignUp.php 
-contains the form used by singers to sign up. At this stage it is a bare bones HTML form. 
