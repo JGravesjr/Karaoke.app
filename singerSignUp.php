@@ -9,7 +9,7 @@
 		die("Database connection failed: " . mysqli_connect_error() . 
 		" (" . mysqli_connect_errno() . ")" );
 	}
-	
+		
 	#Brings in the functions.php doc.
 	require_once("functions.php");
 	$errors = array();	
@@ -27,6 +27,30 @@
 			if (!presenceVal($value)){
 				$errors[$field] = ucfirst($field) . " can't be blank";
 			}
+		}
+		
+		#Checks that the song is in the song database.
+		$query = "SELECT songTitle FROM songList;";
+		$result = mysqli_query($connection, $query);
+		
+
+		#Kills the page if no result from database.
+		if (!$result) {
+			die("Database query failed.");
+		}
+		
+		#Generate a value if they are on the songList.
+		$match = 0; 
+		while($row = mysqli_fetch_array($result)) {
+			$songTitle = $row['songTitle'];
+			if ($song == $songTitle) {
+				$match ++;	
+			}
+		}
+			
+		#Checks to see if there was a match, adds an error if not. 
+		if ($match < 1) {
+			$errors[$match] = "You must choose a song from the list.";	
 		}
 
 		#Check for errors before logging in.

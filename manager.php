@@ -6,9 +6,11 @@
       <title>Karaoke Manager</title>
   </head>
   <body>
+	<!-- Gets the data from signUp and prints it to screen.-->
    <pre> <?php
 	$query = "SELECT * FROM signUp;";
 	$result = mysqli_query($connection, $query);
+	
 	if (!$result) {
 		die("Database query failed.");
 	}
