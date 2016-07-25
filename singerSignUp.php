@@ -15,7 +15,6 @@
 	$errors = array();	
 	#Checks for a submission, if none exists continues to page.
 	if (isset($_POST['submit'])) {
-		
 		#Setting variable values.
 		$name = trim($_POST['name']);
 		$song = trim($_POST['song']);
@@ -54,7 +53,7 @@
 		}
 
 		#Check for errors before logging in.
-		if (empty($errors)) {
+		if (empty($errors)) {	
 			#Add user data to database. 
 			$query = "INSERT INTO signUp (name, songName)
 				VALUES ('{$name}', '{$song}')";
@@ -65,18 +64,77 @@
 		}
 	}	
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Karaoke Sign Up</title>
-	</head>
-	<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Online app to let karaoke singers sign up.">
+    <meta name="author" content="J Graves Jr">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Karaoke Sign Up</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme CSS -->
+    <link href="../../dist/css/bootstrap-theme.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this site -->
+    <link href="karaoke.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+      <!-- Allows us to add multiple pages in a scroll type fashion. -->
+      <div class="site-wrapper-inner">
+        <!-- Starts the cover page -->
+        <div class="cover-container">
+
+          <div class="inner cover"> 
 		<form action="singerSignUp.php" method="post">
-			Name: <input type="text" name="name" value="" /><br>
-			Song Choice: <input type="text" name="song" value="" /><br>
-			<input type="submit" name="submit" value="Submit" />
+			<input type="text" class="input-large" name="name" placeholder="Name" value="" /><br><br>
+			<input type="text" class="input-large" name="song" placeholder="Song Name" value="" /><br><br>
+			<input type="submit" class="btn btn-lg btn-default" name="submit" value="Sign Up" /><br><br>
 		</form>
-		<?php echo form_errors($errors); ?>
-	</body>
+          </div>
+	  <div class="well well-lg" style="background-color: #635c51;"> <?php echo form_errors($errors); ?></div>
+          <div class="mastfoot">
+            <div class="inner">
+              <p> <a href="http://Karaoke.io">Karaoke.io</a>, by <a href="https://twitter.com/jwgravesjr">@jwgravesjr</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
 <?php mysqli_close($connection); ?>
