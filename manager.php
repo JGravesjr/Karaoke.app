@@ -1,4 +1,4 @@
-<?php $connection = mysqli_connect("localhost", "Karaoke", "HarvardFan46", "Karaoke_app"); ?>
+<?php $connection = mysqli_connect("localhost", "karaoke", "HarvardFan46", "Karaoke_app"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">

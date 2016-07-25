@@ -1,7 +1,7 @@
 <?php 
 	#Connects to the Karaoke database through mysqli. I could set all of this to variables,
 	#but it's a one time thing.
-	$connection = mysqli_connect("localhost", "Karaoke", "HarvardFan46", "Karaoke_app");
+	$connection = mysqli_connect("localhost", "karaoke", "HarvardFan46", "Karaoke_app");
 	
 	#Checks to see if there were any errors connecting to the database and stops the page
 	#if so. 
@@ -86,7 +86,7 @@
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this site -->
-    <link href="karaoke.css" rel="stylesheet">
+    <link href="css/karaoke.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
