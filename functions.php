@@ -24,4 +24,39 @@
 		}
 		return $output;
 	}
+
+        function showSignUp() {
+
+		#Connect to database
+        	$connection = mysqli_connect("localhost", "Karaoke", "HarvardFan46", "Karaoke_app"); 
+        	#Assign output variable.
+		$output = "";
+		#Create table
+        	$output .= "<table>";
+                	$output .= "<tr>";
+                        	$output .= "<th>#</th>";
+                        	$output .= "<th>Name</th>";
+                        	$output .= "<th>Song Name</th>";
+                	$output .= "</tr>";
+                        	#Get data from DB
+                        	$query = "SELECT * FROM signUp;";
+                        	$result = mysqli_query($connection, $query);
+				#Check for DB connection
+                        	if (!$result) {
+                                	die("Database query failed.");
+                        	}
+				#Create table row by row with new data.
+                        	while ($row = mysqli_fetch_row($result)) {
+                                	$output .= "<tr>"; 
+                                	$output .= "<td>" . $row[0] . "</td>";
+                                	$output .= "<td>" . $row[1] . "</td>";
+                                	$output .= "<td>" . $row[2] . "</td>";
+                        	        $output .= "</tr>";
+                	        }
+		#End Table
+        	$output .=  "</table>";
+	        return $output;
+
+        }
+
 ?>

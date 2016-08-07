@@ -1,0 +1,17 @@
+a {
+        color: #2c3e50;
+        text-decoration: none;
+        background: #ecf0f1;
+        -webkit-transition: 0.5s;
+        -moz-transition:    0.5s;
+        -ms-transition:     0.5s;
+        -o-transition:      0.5s;
+	transition: 0.5s;
+}
+
+.jumbotron {
+	background: #2c3e50;
+	color: #95a5a6;
+	
+
+}

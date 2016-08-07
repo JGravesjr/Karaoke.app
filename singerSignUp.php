@@ -1,7 +1,7 @@
 <?php 
 	#Connects to the Karaoke database through mysqli. I could set all of this to variables,
 	#but it's a one time thing.
-	$connection = mysqli_connect("localhost", "karaoke", "HarvardFan46", "Karaoke_app");
+	$connection = mysqli_connect("localhost", "Karaoke", "HarvardFan46", "Karaoke_app");
 	
 	#Checks to see if there were any errors connecting to the database and stops the page
 	#if so. 
@@ -29,26 +29,14 @@
 		}
 		
 		#Checks that the song is in the song database.
-		$query = "SELECT songTitle FROM songList;";
-		$result = mysqli_query($connection, $query);
-		
+		$query = "SELECT songTitle FROM songList WHERE songTitle = '$song' LIMIT 1;";
+		$songResult = mysqli_query($connection, $query);
+		$row = mysqli_fetch_array($songResult);
 
-		#Kills the page if no result from database.
-		if (!$result) {
-			die("Database query failed.");
-		}
-		
-		#Generate a value if they are on the songList.
-		$match = 0; 
-		while($row = mysqli_fetch_array($result)) {
-			$songTitle = $row['songTitle'];
-			if ($song == $songTitle) {
-				$match ++;	
-			}
-		}
-			
+		#Assigns DB data to a variable.
+		$songMatch = $row[0];
 		#Checks to see if there was a match, adds an error if not. 
-		if ($match < 1) {
+		if ($song =! $songMatch) {
 			$errors[$match] = "You must choose a song from the list.";	
 		}
 
@@ -56,7 +44,7 @@
 		if (empty($errors)) {	
 			#Add user data to database. 
 			$query = "INSERT INTO signUp (name, songName)
-				VALUES ('{$name}', '{$song}')";
+				VALUES ('{$name}', '{$songMatch}')";
 			$result = mysqli_query($connection, $query);
 			if (!$result) {
 				die("Database query failed. " . mysqli_error($connection));
@@ -86,7 +74,7 @@
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this site -->
-    <link href="css/karaoke.css" rel="stylesheet">
+    <link href="./css/karaoke.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -108,11 +96,17 @@
         <div class="cover-container">
 
           <div class="inner cover"> 
-		<form action="singerSignUp.php" method="post">
-			<input type="text" class="input-large" name="name" placeholder="Name" value="" /><br><br>
-			<input type="text" class="input-large" name="song" placeholder="Song Name" value="" /><br><br>
-			<input type="submit" class="btn btn-lg btn-default" name="submit" value="Sign Up" /><br><br>
-		</form>
+		<?php 
+			if (isset($_POST['submit']) && empty($errors)){
+				echo "Proof of concept.";
+			} else {
+			echo '<form action="singerSignUp.php" method="post">
+				<input type="text" class="input-large" name="name" placeholder="Name" value="" /><br><br>
+				<input type="text" class="input-large" name="song" placeholder="Song Name" value="" /><br><br>
+				<input type="submit" class="btn btn-lg btn-default" name="submit" value="Sign Up" /><br><br>
+			</form>'; 
+			}
+		?>
           </div>
 	  <div class="well well-lg" style="background-color: #635c51;"> <?php echo form_errors($errors); ?></div>
           <div class="mastfoot">
